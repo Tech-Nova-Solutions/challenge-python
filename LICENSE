@@ -1,21 +1,55 @@
-MIT License
+# Volt Analytics - Coleta de Dados:
 
-Copyright (c) 2024 Tech Nova Solutions
+## 📖 Resumo: 
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+O VoltAnalytics, desenvolvido por completo com a Linguagem de programação *BackEnd* **Python**, tem a principal função de coletar dados da FórmulaE  e realizar comparações com outras modalidades esportivas.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+A ideia do programa é fazer com que ao final da integração, o usuário que entrar na página web, entenda por meio de dados que a Fórmula E pode ser igualmente ou dependendo da situação até mais competitiva que outras modalidades automobilísticas e caso seja de seu interesse, realizar a compra de produtos relacionados a modalidade.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## 📔 Manual de uso: 
+- Certifique-se de que tenha o [Python](https://www.python.org/downloads/) e a biblioteca [Plotly](https://pypi.org/project/plotly/) instalados na máquina em que deseja rodar o código.
+
+> 📁 Instalação da biblioteca Plotly:
+```
+pip install plotly
+```
+- Abra o programa com um compilador Python: É recomendado que seja feito o uso de uma IDE como o [PyCharm](https://www.jetbrains.com/pycharm/) ou então o [IntelliJ Idea](https://www.jetbrains.com/idea/).
+- Caso não entenda como o programa funciona, você pode consultar abaixo nas **Funcionalidades**.
+
+## 📋 Funcionalidades:
+<details>
+  <summary><b>Simulação de compra de ingressos para corridas.</b></summary>
+  O usuário seleciona o tipo de ingresso (Meia ou Inteira) e a quantidade, assim que ele quiser, pode retornar ao menu.
+</details>
+
+<details>
+  <summary><b>Aba para verificar os ingressos comprados e adicionar itens da loja.</b></summary>
+  1. Verificar Carrinho
+  
+  1. Limpar a lista de compras
+  
+  3. Voltar ao menu
+</details>
+
+<details>
+  <summary><b>Opção para acessar dados da Fórmula E.</b></summary>
+  1. <b>Biografia</b> de corredores brasileiros;
+  
+  2. <b>Comparação</b> da velocidade dos veículos FórmulaE x Fórmula Indy x Fórmula 1;
+  
+</details>
+Caso o usuário queira sair do programa, existe uma opção que fecha o terminal.
+
+## 🧑‍💻 Desenvolvedores:
+
+[Leonardo Rocha Scarpitta](https://www.linkedin.com/in/leonardorscarpitta/)
+
+[Giulia Rocha](https://www.linkedin.com/in/giulia-barbizan/)
+
+[Felipe Marques de Oliveira](https://www.linkedin.com/in/felipe-marques-a360452b6/)
+
+[Gustavo Viega Martins Lopes](https://www.linkedin.com/in/gustavo-viega-martins-lopes-75051a26b/)
+
+
+## 📃 Licensa
+O código está sob a licensa MIT que pode ser encontrado no arquivo [MIT-LICENSE.txt](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt).
