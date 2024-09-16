@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 
 
 def clear():
+    """Essa função limpa todos caracteres do console"""
     print("\n" * 130)  # Comando para limpar o console
     os.system("clear") # Limpar o terminal em dispositivos que utilizam Linux
     os.system("cls") # Limpar o terminal em dispositivos que utilizam windows
@@ -28,6 +29,7 @@ techNovaSolutions = f"""
 
 # FUNÇÃO PARA COMPRAR TICKETS PARA EVENTOS
 def comprarTickets(listaDeCompras):
+    """Essa função simula a compra de ingressos e adiciona os itens a uma lista (Carrinho)."""
     adicionar = "s"
     valorTotal = 0
     while adicionar == "s":
@@ -78,12 +80,14 @@ def comprarTickets(listaDeCompras):
     main()
 
 def printBuyList(list):
+    """Essa função exibe os itens da lista de compras."""
     for i in range(len(list)):
         print(f"{list[i]}")
     print(divisor)
 
 # FUNÇÃO PARA VERIFICAR OS ITENS NO CARRINHO E ADICIONAR NOVOS
 def verificarCarrinho(listaDeCompras, listaItensLoja):
+    """Essa função verifica e gerencia o carrinho de compras, permitindo ao usuário adicionar, remover ou limpar itens"""
     clear()
     if len(listaDeCompras) == 0:
         print("Carrinho vazio")
@@ -164,6 +168,7 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
 
 
 def acessarDados():
+    """Essa função exibe um menu para o usuário acessar comparações relacionados a estatisticas da Formula E com outras competições."""
     print("[1] Comparação: Veículos da Fórmula 1 x Fórmula E x Fórmula Indy")
     print("[2] Informações: Corredores brasileiros")
     print(f"{divisor}")
@@ -181,6 +186,7 @@ def acessarDados():
 
 
 def velocidadeVeiculos():
+    """Essa função cria e exibe um gráfico comparativo das velocidades atingidas pelos veículos da Fórmula 1, Fórmula Indy e Fórmula E em diferentes momentos, usando dados simulados."""
     # Dados de exemplo - Simulação
     categorias = [
         'Em repouso 0km/h',
@@ -264,6 +270,7 @@ def velocidadeVeiculos():
 
 # FUNÇÃO PARA ACESSAR A LISTA DE CORREDORES
 def acessarCorredores():
+    """Essa função exibe um menu para o usuário acessar as biografias de dois corredores brasileiros da Fórmula E."""
     print(techNovaSolutions)
 
     print("[1] - (ERT) Sérgio Sette Câmara")
@@ -305,6 +312,7 @@ def acessarCorredores():
 
 # PROGRAMA - ESTRUTURA PRINCIPAL
 def main():
+    """Função principal que exibe o menu principal do programa e permite ao usuário navegar pelas opções disponíveis."""
     clear()
     print("[1] - Comprar tickets")
     print("[2] - Verificar carrinho")
