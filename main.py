@@ -35,30 +35,46 @@ def comprarTickets(listaDeCompras):
         print("[2] - Meia: R$ 150,00")
         print("[3] - Cancelar operação")
         print(divisor)
-        tipoDeIngresso = int(input("Selecione o tipo de Ingresso: "))
-        match tipoDeIngresso:
-        # A TECLA 1 REPRESENTA OS INGRESSOS DO TIPO INTEIRO COM O VALOR DE "R$ 300" CADA
-            case 1:
-                numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
-                valorTotal += 300 * numeroDeIngressos
-                for ingresso in range(numeroDeIngressos):
-                    listaDeCompras.append(f"[🎟] x1 Ingresso Inteira")
-        # A TECLA 2 REPRESENTA OS INGRESSOS DO TIPO MEIA COM O VALOR DE "R$ 150" CADA
-            case 2:
-                numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
-                valorTotal += 150 * numeroDeIngressos
-                for ingresso in range(numeroDeIngressos):
-                    listaDeCompras.append(f"[🎫] x1 Ingresso Meia")
-            case 3:
-                input(f"Operação cancelara! {menuMsg}")
-                main()
-            case _:
-                input(f"Opção inválida! {menuMsg}")
-                main()
-        adicionar = input("Deseja adicionar outro ingresso? [s/n]")
 
-    input(f"""✅ Ingressos comprados com sucesso! O valor total é de: R$ {valorTotal}!
-{menuMsg}""")
+        try:
+            tipoDeIngresso = int(input("Selecione o tipo de Ingresso: "))
+        except ValueError:
+            print("Erro! Por favor, insira um número válido.")
+            continue
+
+        match tipoDeIngresso:
+            case 1:
+                try:
+                    numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
+                    valorTotal += 300 * numeroDeIngressos
+                    for _ in range(numeroDeIngressos):
+                        listaDeCompras.append(f"[🎟] x1 Ingresso Inteira")
+                except ValueError:
+                    print("Erro! Insira um número válido para a quantidade de ingressos.")
+                    continue
+            case 2:
+                try:
+                    numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
+                    valorTotal += 150 * numeroDeIngressos
+                    for _ in range(numeroDeIngressos):
+                        listaDeCompras.append(f"[🎫] x1 Ingresso Meia")
+                except ValueError:
+                    print("Erro! Insira um número válido para a quantidade de ingressos.")
+                    continue
+            case 3:
+                print("Operação cancelada!")
+                main()
+                return
+            case _:
+                print("Opção inválida!")
+                continue
+
+        adicionar = input("Deseja adicionar outro ingresso? [s/n]").lower()
+        if adicionar not in ["s", "n"]:
+            print("Entrada inválida! Por favor, insira 's' ou 'n'.")
+            adicionar = "n"
+
+    print(f"✅ Ingressos comprados com sucesso! O valor total é de: R$ {valorTotal}!")
     main()
 
 def printBuyList(list):
@@ -74,11 +90,19 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
         print(divisor)
     else:
         printBuyList(listaDeCompras)
+
     print("[1] - Adicionar um novo item")
     print("[2] - Limpar a Lista de compras")
     print("[3] - Remover um ou mais itens da lista de compras")
-    print("[3] - Voltar ao menu")
-    opcao = int(input("Escolha uma opção - "))
+    print("[4] - Voltar ao menu")
+
+    try:
+        opcao = int(input("Escolha uma opção: "))
+    except ValueError:
+        print("Erro! Insira uma opção válida.")
+        main()
+        return
+
     match opcao:
         case 1:
             continuar = "s"
@@ -86,48 +110,56 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
                 clear()
                 print("Itens da Loja - Fórmula E")
                 print(divisor)
-                cont = 0 # INICIALIZAR O CONTADOR
-                for item in listaItensLoja:
-                    cont +=1
-                    print(f"[{cont}] - {item}")
-                print(f"{divisor} ")
-                novoItem = int(input("Digite o nome do item: "))
-                if novoItem <= len(listaItensLoja):
-                    novoItem -= 1
-                    listaDeCompras.append(f"🚗 {listaItensLoja[novoItem]}")
-                else:
-                    print('Erro! Item indisponível ou inexistente')
-                print(divisor)
-                for items in listaDeCompras:
-                    print(items)
-                print(divisor)
-                continuar = input("Deseja continuar? [s/n]")
-            verificarCarrinho(listaDeCompras, listaItensLoja)
+                for i, item in enumerate(listaItensLoja, 1):
+                    print(f"[{i}] - {item}")
 
+                try:
+                    novoItem = int(input("Digite o número do item: "))
+                    if 1 <= novoItem <= len(listaItensLoja):
+                        listaDeCompras.append(f"🚗 {listaItensLoja[novoItem - 1]}")
+                    else:
+                        print("Erro! Item indisponível ou inexistente.")
+                except ValueError:
+                    print("Erro! Digite um número válido.")
+                    continue
+
+                print(divisor)
+                printBuyList(listaDeCompras)
+                continuar = input("Deseja continuar? [s/n]").lower()
+                if continuar not in ["s", "n"]:
+                    print("Entrada inválida! Por favor, insira 's' ou 'n'.")
+                    continuar = "n"
+
+            verificarCarrinho(listaDeCompras, listaItensLoja)
         case 2:
             clear()
             if len(listaDeCompras) > 0:
                 listaDeCompras.clear()
-                input(f"❌ Você removeu todos os itens do seu carrinho. {menuMsg}")
+                print("❌ Você removeu todos os itens do seu carrinho.")
             else:
-                input(f'Erro! Seu carrinho está vazio! {menuMsg}')
+                print("Erro! Seu carrinho já está vazio.")
             main()
-
         case 3:
             clear()
-            printBuyList(listaDeCompras)
-            itemDelete = 1
-            if len(listaDeCompras) > 0 and itemDelete != 0:
-                itemDelete = int(input("Digite o número do item que será removido da lista de compras, ou então '0' para cancelar a operação:"))
-                del(listaDeCompras[itemDelete - 1])
+            if len(listaDeCompras) > 0:
+                printBuyList(listaDeCompras)
+                try:
+                    itemDelete = int(input("Digite o número do item a ser removido ou '0' para cancelar: "))
+                    if 1 <= itemDelete <= len(listaDeCompras):
+                        del (listaDeCompras[itemDelete - 1])
+                    elif itemDelete == 0:
+                        print("Operação cancelada.")
+                    else:
+                        print("Erro! Item não encontrado.")
+                except ValueError:
+                    print("Erro! Digite um número válido.")
             else:
-                input(f'Erro! Seu carrinho está vazio! {menuMsg}')
+                print("Erro! Seu carrinho está vazio.")
             main()
-
         case 4:
             main()
         case _:
-            input(f"Opção inválida! {menuMsg}")
+            print("Opção inválida!")
             main()
 
 
@@ -278,8 +310,14 @@ def main():
     print("[2] - Verificar carrinho")
     print("[3] - Dados da Fórmula E")
     print("[4] - Encerrar programa")
-    print(f"{divisor}")
-    opcao = int(input("Escolha uma opção - "))
+    print(divisor)
+
+    try:
+        opcao = int(input("Escolha uma opção: "))
+    except ValueError:
+        print("Erro! Digite um número válido.")
+        main()
+        return
 
     match opcao:
         case 1:
@@ -295,8 +333,8 @@ def main():
             clear()
             print("Programa encerrado...")
         case _:
-            clear()
-            print(f"Opção inválida! {menuMsg}")
+            print("Opção inválida!")
+            main()
 
 
 # Inicializar a lista de itens comprados pelo usuário
