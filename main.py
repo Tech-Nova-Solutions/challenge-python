@@ -26,13 +26,44 @@ techNovaSolutions = f"""
 {divisor}
 """
 
+corridasDisponiveis = [
+    {"data": "2024-10-05", "hora": "15:00", "local": "São Paulo"},
+    {"data": "2024-10-12", "hora": "18:00", "local": "Nova York"},
+    {"data": "2024-10-20", "hora": "16:00", "local": "Tóquio"},
+    {"data": "2024-10-28", "hora": "14:00", "local": "Berlim"}
+]
 
 # FUNÇÃO PARA COMPRAR TICKETS PARA EVENTOS
+# FUNÇÃO PARA COMPRAR TICKETS PARA EVENTOS
 def comprarTickets(listaDeCompras):
-    """Essa função simula a compra de ingressos e adiciona os itens a uma lista (Carrinho)."""
+    """Essa função simula a compra de ingressos, selecionando a corrida e adicionando os itens a uma lista (Carrinho)."""
     adicionar = "s"
     valorTotal = 0
     while adicionar == "s":
+        # Seleção de corrida
+        print("Selecione a corrida desejada:")
+        print(divisor)
+        for i, corrida in enumerate(corridasDisponiveis, 1):
+            print(f"[{i}] - {corrida['data']} às {corrida['hora']} - {corrida['local']}")
+        print(divisor)
+        try:
+            opcao = int(input("Escolha a corrida ou '0' para cancelar: "))
+            if 1 <= opcao <= len(corridasDisponiveis):
+                corridaEscolhida = corridasDisponiveis[opcao - 1]
+                corridaDescricao = f"🚗 Corrida em {corridaEscolhida['local']} - {corridaEscolhida['data']} às {corridaEscolhida['hora']}"
+                print(f"Corrida selecionada: {corridaEscolhida['local']} em {corridaEscolhida['data']} às {corridaEscolhida['hora']}")
+            elif opcao == 0:
+                print("Operação cancelada!")
+                main()
+                return
+            else:
+                print("Erro! Corrida inexistente.")
+                continue
+        except ValueError:
+            print("Erro! Digite um número válido.")
+            continue
+
+        # Seleção do tipo de ingresso
         print("[1] - Inteira: R$ 300,00")
         print("[2] - Meia: R$ 150,00")
         print("[3] - Cancelar operação")
@@ -50,7 +81,7 @@ def comprarTickets(listaDeCompras):
                     numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                     valorTotal += 300 * numeroDeIngressos
                     for _ in range(numeroDeIngressos):
-                        listaDeCompras.append(f"[🎟] x1 Ingresso Inteira")
+                        listaDeCompras.append(f"[🎟] x1 Ingresso Inteira {corridaDescricao}")
                 except ValueError:
                     print("Erro! Insira um número válido para a quantidade de ingressos.")
                     continue
@@ -59,7 +90,7 @@ def comprarTickets(listaDeCompras):
                     numeroDeIngressos = int(input("Quantos ingressos você irá querer desse tipo? "))
                     valorTotal += 150 * numeroDeIngressos
                     for _ in range(numeroDeIngressos):
-                        listaDeCompras.append(f"[🎫] x1 Ingresso Meia")
+                        listaDeCompras.append(f"[🎫] x1 Ingresso Meia {corridaDescricao}")
                 except ValueError:
                     print("Erro! Insira um número válido para a quantidade de ingressos.")
                     continue
@@ -78,6 +109,8 @@ def comprarTickets(listaDeCompras):
 
     print(f"✅ Ingressos comprados com sucesso! O valor total é de: R$ {valorTotal}!")
     main()
+
+
 
 def printBuyList(list):
     """Essa função exibe os itens da lista de compras."""
@@ -146,11 +179,18 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
         case 3:
             clear()
             if len(listaDeCompras) > 0:
-                printBuyList(listaDeCompras)
+                print("Selecione o número do item que deseja remover:")
+                # Exibir todos os itens do carrinho
+                for i, item in enumerate(listaDeCompras, 1):
+                    print(f"[{i}] {item}")
+                print(divisor)
+
                 try:
                     itemDelete = int(input("Digite o número do item a ser removido ou '0' para cancelar: "))
                     if 1 <= itemDelete <= len(listaDeCompras):
-                        del (listaDeCompras[itemDelete - 1])
+                        itemParaRemover = listaDeCompras[itemDelete - 1]
+                        listaDeCompras.remove(itemParaRemover)  # Remover o item correto
+                        print(f"✔️ Item removido: {itemParaRemover}")
                     elif itemDelete == 0:
                         print("Operação cancelada.")
                     else:
@@ -165,7 +205,6 @@ def verificarCarrinho(listaDeCompras, listaItensLoja):
         case _:
             print("Opção inválida!")
             main()
-
 
 def acessarDados():
     """Essa função exibe um menu para o usuário acessar comparações relacionados a estatisticas da Formula E com outras competições."""
@@ -344,10 +383,9 @@ def main():
             print("Opção inválida!")
             main()
 
-
 # Inicializar a lista de itens comprados pelo usuário
 listaDeCompras = []
-#Inicializar a lista de itens disponíveis na loja
+# Inicializar a lista de itens disponíveis na loja
 listaItensLoja = ["[🎒] Bolsa - Fórmula E", "[👕] Camiseta - Fórmula E", "[👖] Calça - Fórmula E", "[👚] Blusa - Fórmula E", "[🚗] Carro Lego - Fórmula E"]
 
 # DEFAULT
